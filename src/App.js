@@ -20,7 +20,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get("http://api.openweathermap.org/data/2.5/weather?q=London&appid=44ee963ea8384bd561e7cce2a9b68f08", {
+    axios.get("http://api.openweathermap.org/data/2.5/weather?q=Bhubaneshwar&appid=44ee963ea8384bd561e7cce2a9b68f08", {
       cityName: { cityName }
     }).then((response) => {
       setName(response.data.name);
