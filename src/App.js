@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
@@ -36,10 +35,32 @@ function App() {
     })
   }, []);
 
+  const HandleSubmit = () => {
+    // console.log(cityName);
+    const name = document.getElementById("searchCity").value
+    console.log(name)
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${name}&appid=44ee963ea8384bd561e7cce2a9b68f08`, {
+        cityName: { cityName }
+      }).then((response) => {
+        setName(response.data.name);
+        setDate(response.data.dt);
+        setTemperature(response.data.main.temp);
+        setCloud(response.data.clouds.all);
+        setMaxTemp(response.data.main.temp_max);
+        setMinTemp(response.data.main.temp_min);
+        setWind(response.data.wind.speed);
+        // setRain(response.data.rain);
+        setSunrise(response.data.sys.sunrise);
+        setSunset(response.data.sys.sunset);
+      });
+  }
+
   return (
     <React.Fragment>
       <div>
         <h1>Weather APP</h1>
+        <input id="searchCity" type="text" value={cityName} />
+        <input type="submit" value="Search" onClick={HandleSubmit} />
         <div>
           <h1 className="font-weight-bold">
             {name}
